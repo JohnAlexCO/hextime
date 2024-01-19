@@ -16,7 +16,7 @@ and the fourth about 1.31 seconds.
 
 ## What is the 13-month calendar?
 The 13-month calendar is one that just takes the Gregorian calendar's year, splits it into 13 months of 28 days long (4-weeks exactly), and then takes any remaining days
-and puts them into their own special new-year's eve "month". Some versions of the 13-month calendar assert that the first day of the year is also always a Monday,
+and puts at the end of the last month. Some versions of the 13-month calendar assert that the first day of the year is also always a Monday,
 and that eve-month basically is in day-of-the-week limbo.
 
 ## Installation
