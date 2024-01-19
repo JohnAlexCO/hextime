@@ -1,6 +1,9 @@
 # hextime
 A toy app that shows the date and time using 13-month calendar and base-16 time. 
 
+![image](https://github.com/JohnAlexCO/hextime/assets/81481181/2ac5a540-abb2-4662-8f54-0be0f14403dc)
+
+
 ## What is base-16 time?
 I made this up because of a comment thread about how "base 12 sucks" and we should represent time elsewise.
 I thought it'd be fun to just divide the day up using base-16. Using four digits, we can represent down to the seconds,
