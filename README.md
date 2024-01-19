@@ -20,8 +20,12 @@ and puts at the end of the last month. Some versions of the 13-month calendar as
 and that eve-month basically is in day-of-the-week limbo.
 
 ## Installation
-Save the `hex.c` file somewhere and compile it with `gcc` or `clang`.
-I personally recommend just doing `gcc -o hextime ./hex.c`.
+For the applet showing the current time, save `clock.c` and `hextime.c` and clone [tigr](https://github.com/erkkah/tigr) and then compile based on the system you're on; for me in Linux, that looks like `gcc -o hexclock clock.c -lGLU -lGL -lX11`.
+
+For standalone use, save the `hex.c` file and compile it using `gcc` or `clang`.
+
+For use within a project, save `hextime.c` and compile it using `gcc` or `clang`.
+I personally recommend just doing `gcc -o hextime ./hextime.c`.
 Compilation will depend on
 _<stdlib.h>_,
 _<stdio.h>_,
@@ -31,7 +35,9 @@ _<string.h>_.
 
 ## Standalone Usage
 
-`hextime` will just print the current local time.
+`hexclock` will open a graphical window that displays the current date and time.
+
+`hextime` will just print the current local time in the terminal.
 
 `hextime hh mm ss` will print the given regular time as hextime.
 
