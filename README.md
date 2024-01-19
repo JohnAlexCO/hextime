@@ -1,7 +1,7 @@
 # hextime
 A toy app that shows the date and time using 13-month calendar and base-16 time. 
-
-![image](https://github.com/JohnAlexCO/hextime/assets/81481181/2ac5a540-abb2-4662-8f54-0be0f14403dc)
+<br><img width="400px" src="https://github.com/JohnAlexCO/hextime/assets/81481181/838016f9-bc9a-4cd8-8f0a-503c401af627" />
+<img width="400px" src="https://github.com/JohnAlexCO/hextime/assets/81481181/2ac5a540-abb2-4662-8f54-0be0f14403dc" />
 
 
 ## What is base-16 time?
