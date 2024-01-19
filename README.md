@@ -44,8 +44,7 @@ _<string.h>_.
 `hextime yyyy mm dd hh mm ss [-l]` will print the given datetime as 13-month hextime. the `-l` flag tells hextime this is a leap-year.
 
 ## Import Usage
-If you'd like to use this inside of another program, 
-remove the `main` function and `#include "hex.c"`.
+If you'd like to use this inside of another program, just `#include "hextime.c"`.
 
 ### currentTime()
 `currentTime` takes no arguments and returns a `regtime_t` struct populated with the current local date and time.
