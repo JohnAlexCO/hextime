@@ -84,7 +84,7 @@ hextime_t *hexTime(regtime_t *dtime){
     // Month and Month-day
     hex->year =     dtime->year;
     hex->yday =     dtime->yday;
-    hex->mon =      dtime->yday / 28; if (hex->mon > 12){hex->mon = 12;}
+    hex->mon =      dtime->yday / 28;
     hex->mday =     hex->yday - (hex->mon * 28);
     // Cast time to dayseconds
     uint64_t maxdayseconds = 24*60*60;
