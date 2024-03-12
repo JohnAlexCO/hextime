@@ -20,9 +20,9 @@ and puts at the end of the last month. Some versions of the 13-month calendar as
 and that eve-month basically is in day-of-the-week limbo.
 
 ## Installation
-For the applet showing the current time, save `clock.c` and `hextime.c` and clone [tigr](https://github.com/erkkah/tigr) and then compile based on the system you're on; for me in Linux, that looks like `gcc -o hexclock clock.c -lGLU -lGL -lX11`.
+For the applet showing the current time, save `clock.c` and `hextime.c` and clone [tigr](https://github.com/erkkah/tigr) and then compile based on the system you're on; for me in Linux, that looks like `gcc -o hexclock clock.c -lGLU -lGL -lX11`. Specifically, make sure that the `tigr.c` and `tigr.h` files and the `tigr/src` folders are all in the top directory.
 
-For standalone use, save the `hex.c` file and compile it using `gcc` or `clang`.
+For the standalone clock applet, compile `clock.c` using `gcc` or `clang`.
 
 For use within a project, save `hextime.c` and compile it using `gcc` or `clang`.
 I personally recommend just doing `gcc -o hextime ./hextime.c`.
@@ -35,13 +35,7 @@ _<string.h>_.
 
 ## Standalone Usage
 
-`hexclock` will open a graphical window that displays the current date and time.
-
-`hextime` will just print the current local time in the terminal.
-
-`hextime hh mm ss` will print the given regular time as hextime.
-
-`hextime yyyy mm dd hh mm ss [-l]` will print the given datetime as 13-month hextime. the `-l` flag tells hextime this is a leap-year.
+`clock` will open a graphical window that displays the current date and time.
 
 ## Import Usage
 If you'd like to use this inside of another program, just `#include "hextime.c"`.

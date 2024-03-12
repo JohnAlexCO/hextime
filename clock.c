@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     char *str_time = malloc(strsize);
 
     TPixel white = tigrRGB(fr, fg, fb);
-    Tigr *screen = tigrWindow(120, 40, "Hello", TIGR_FIXED);
+    Tigr *screen = tigrWindow(120, 40, "Hexclock - Modula.dev", TIGR_FIXED);
     while (!tigrClosed(screen))
     {
         now = hexTime(currentTime());
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
         tigrClear(screen, tigrRGB(br, bg, bb));
         tigrPrint(screen, tfont, 5, 5, white, str_date);
         tigrPrint(screen, tfont, 5, 15, white, str_time); // stringTime()
-        tigrPrint(screen, tfont, 5, 25, white, "http://johnalex.co");
+        tigrPrint(screen, tfont, 5, 25, white, "modula.dev");
         tigrUpdate(screen);
     }
     tigrFree(screen);
