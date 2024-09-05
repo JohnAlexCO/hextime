@@ -1,59 +1,46 @@
-#include "tigr.h"
-#include "tigr.c"
+/*
+    The new below example is an integration with the GNOME extension
+        https://extensions.gnome.org/extension/5018/simple-message/
+    and allows it to be used to display the time in base-16
+*/
+#include <unistd.h>
+#include <stdbool.h>
 #include "hextime.c"
-#define strsize 32
-#define br 0
-#define bg 0
-#define bb 0
-#define fr 255
-#define fg 255
-#define fb 255
 
-int hexof(int v){
-    if( v < 10 ){ return v + 48; }
-    else { return v + 97 - 10; }
+#define offset 65
+char *timeBuffer[255];
+char AMPM[] = {"AM\0"};
+int hexof(int v) { if( v < 10 ){ return v + '0'; } if ( v > 15 ) { return 'F'; } return v + 'A' - 10; }
+void strTime(hextime_t time, regtime_t r){
+    /* Hexidecimal v. Sexagesimal */
+    if (r.hour >=12 ) { r.hour-=12; AMPM[0]='P'; } else { AMPM[0]='A'; }
+    sprintf(
+        timeBuffer,
+        "dconf write /org/gnome/shell/extensions/simple-message/message \
+        '\"%c%c:%c%c\t%d:%02d.%02d %s\"'",
+        hexof(time.d1), hexof(time.d2), hexof(time.d3), hexof(time.d4),
+        r.hour, r.min, r.sec, AMPM
+    );
 }
 
-void strDate(hextime_t time, char *result){
-    for (int i=0;i<strsize-1;i++){result[i]=0;}
-    strcpy(result, months[time.mon]);
-    int offset = strlen(result);
-    result[offset] = 32;
-    int n1 = time.mday / 10;
-    int n2 = time.mday % 10+1;
-    result[offset+1] = hexof(n1);
-    result[offset+2] = hexof(n2);
-    result[offset+3] = 0;
+void updateTime(regtime_t *r, hextime_t *h){
+    regTime(r); hexTime(h, r); strTime(*h, *r);
 }
 
-void strTime(hextime_t time, char *result){
-    for (int i=0;i<strsize-1;i++){result[i]=0;}
-    result[0] = hexof(time.d1); result[1] = hexof(time.d2);
-    result[3] = hexof(time.d3); result[4] = hexof(time.d4);
-    result[2] = 58; // colon
-    result[5] = 0;
-}
-
-int main(int argc, char *argv[])
+#define updatetime  120
+#define sleeptime   300
+int main(int argc, char **argv)
 {
-    // Setup hextime
-    hextime_t *now = malloc(sizeof(hextime_t));
-    char *str_date = malloc(strsize); 
-    char *str_time = malloc(strsize);
-
-    TPixel white = tigrRGB(fr, fg, fb);
-    Tigr *screen = tigrWindow(120, 40, "Hexclock - Modula.dev", TIGR_FIXED);
-    while (!tigrClosed(screen))
-    {
-        now = hexTime(currentTime());
-        strDate(*now, str_date);
-        strTime(*now, str_time);
-        tigrClear(screen, tigrRGB(br, bg, bb));
-        tigrPrint(screen, tfont, 5, 5, white, str_date);
-        tigrPrint(screen, tfont, 5, 15, white, str_time); // stringTime()
-        tigrPrint(screen, tfont, 5, 25, white, "modula.dev");
-        tigrUpdate(screen);
+    int until = 0; char last = 'x';
+    regtime_t *r = malloc(sizeof(regtime_t));
+    hextime_t *h = malloc(sizeof(hextime_t));
+    updateTime(r, h);
+    while (true) {
+        updateTime(r, h);
+        if ( last != timeBuffer[4] ) {
+            last = timeBuffer[4];
+            system(timeBuffer);
+        }   sleep(1);
     }
-    tigrFree(screen);
     return 0;
 }
