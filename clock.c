@@ -13,7 +13,8 @@ char AMPM[] = {"AM\0"};
 int hexof(int v) { if( v < 10 ){ return v + '0'; } if ( v > 15 ) { return 'F'; } return v + 'A' - 10; }
 void strTime(hextime_t time, regtime_t r){
     /* Hexidecimal v. Sexagesimal */
-    if (r.hour >=12 ) { r.hour-=12; AMPM[0]='P'; } else { AMPM[0]='A'; }
+    if (r.hour >=12 ) { AMPM[0]='P'; } else { AMPM[0]='A'; }
+    if (r.hour > 12)  { r.hour-=12; }
     sprintf(
         timeBuffer,
         "dconf write /org/gnome/shell/extensions/simple-message/message \
