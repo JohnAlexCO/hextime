@@ -4,7 +4,7 @@ A toy app that shows the date and time using 13-month calendar and base-16 time.
 ## What is base-16 time?
 I made this up because of a comment thread about how "base 12 sucks" and we should represent time elsewise.
 I thought it'd be fun to just divide the day up using base-16. Using four digits, we can represent down to the seconds,
-unlike in normal "base 12" time where this requires 6 digits (hh:mm:ss).
+unlike in normal "base 2\*12\*60" time where this requires 6 digits (hh:mm:ss).
 
 In base-16 time, the first digit represents 1.5 hours,
 the second about 5 minutes and 38 seconds,
