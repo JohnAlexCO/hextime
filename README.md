@@ -1,8 +1,5 @@
 # hextime
 A toy app that shows the date and time using 13-month calendar and base-16 time. 
-<br><img width="400px" src="https://github.com/JohnAlexCO/hextime/assets/81481181/838016f9-bc9a-4cd8-8f0a-503c401af627" />
-<img width="400px" src="https://github.com/JohnAlexCO/hextime/assets/81481181/2ac5a540-abb2-4662-8f54-0be0f14403dc" />
-
 
 ## What is base-16 time?
 I made this up because of a comment thread about how "base 12 sucks" and we should represent time elsewise.
@@ -20,51 +17,10 @@ and puts at the end of the last month. Some versions of the 13-month calendar as
 and that eve-month basically is in day-of-the-week limbo.
 
 ## Installation
-For the applet showing the current time, save `clock.c` and `hextime.c` and clone [tigr](https://github.com/erkkah/tigr) and then compile based on the system you're on; for me in Linux, that looks like `gcc -o hexclock clock.c -lGLU -lGL -lX11`. Specifically, make sure that the `tigr.c` and `tigr.h` files and the `tigr/src` folders are all in the top directory.
-
-For the standalone clock applet, compile `clock.c` using `gcc` or `clang`.
-
-For use within a project, save `hextime.c` and compile it using `gcc` or `clang`.
-I personally recommend just doing `gcc -o hextime ./hextime.c`.
-Compilation will depend on
-_<stdlib.h>_,
-_<stdio.h>_,
-_<time.h>_,
-_<stdint.h>_, and
-_<string.h>_.
-
-## Standalone Usage
-
-`clock` will open a graphical window that displays the current date and time.
-
-## Import Usage
-If you'd like to use this inside of another program, just `#include "hextime.c"`.
-
-### currentTime()
-`currentTime` takes no arguments and returns a `regtime_t` struct populated with the current local date and time.
-
-### regtime_str()
-The `regtime_str` function expects to be passed `int argc` and `char **argv`.
-`argc` should be the length of argv.
-`argv` should store the string representations of each digit in the regular-time representation, starting at index 1 instead of 0,
-such as `4, [null, "02", "33", "16"]` to represent 02:33 plus 16 sec,
-or `7, [null, "1999", "04", "01", "12", "41", "00"]` to represent 12:41 plus 0 sec on April 1st, 1999.
-
-### hextime()
-The `hexTime` function expects to be passed a `regtime_t` struct, which looks like
-```
-typedef struct {
-    uint64_t year; uint64_t mon; uint64_t mday; uint64_t yday;
-    uint64_t hour; uint64_t min; uint64_t sec;
-} regtime_t;
-```
-and will return a `hextime_t` struct which looks like
-```
-typedef struct {
-    uint64_t year;  uint64_t mon; uint64_t mday; uint64_t yday;
-    uint64_t d1;    uint64_t d2;  uint64_t d3;   uint64_t d4;
-} hextime_t;
-```
-
-### print_hexTime
-`print_hexTime` accepts a `hextime_t` struct and prints it out to `stdout` in a nice readable form.
+If you want to use the gnome-shell example (`clock.c`), you're going to need to be on a GNOME system
+with GNOME Tweaks and the Extension Manager installed,
+as well as Freddez' `gnome-shell-simple-message` ([GitHub](https://github.com/freddez/gnome-shell-simple-message), [Gnome.org](https://extensions.gnome.org/extension/5018/simple-message/)). From there, all you really need to do is build from source, move the executable to somewhere in your `$PATH`,
+and make sure the executable is running in the background somewhere. The plugin helpfully lets you make it so clicking it 
+launches the background service, but like, I wouldn't recommend clicking it a whole bunch because I did nothing at all
+to make sure it doesn't spawn a whole bunch of the same redundant process.
+![image](https://github.com/user-attachments/assets/55244bac-be1b-4f66-ab23-c7fce764ee20)
